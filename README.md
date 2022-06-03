@@ -6,6 +6,8 @@ Lately I wrote mostly Javascript and Javascript (and Typescript). It's great, I 
 
 It can be achieved using [WebAssembly](https://en.wikipedia.org/wiki/WebAssembly). So I started digging into it, and that repo is a result of my first impression.
 
+- PS. Use an http server to run the code (because of CORS)
+
 ## Experiment #1: Array Sum
 
 I was quite disappointed to hear that there is no query manipulation possible with WebAssembly. The appropriate utility for it is to outsource resource-intensive functions to WASM, and consume them from the ol' good Javascript.
