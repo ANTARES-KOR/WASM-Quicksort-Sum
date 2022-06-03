@@ -1,4 +1,4 @@
-<p align="center"><img src="https://commons.wikimedia.org/wiki/File:WebAssembly_Logo.svg"></p>
+<p align="center"><img src="https://github.com/carlosbaraza/web-assembly-logo/blob/master/dist/logo/web-assembly-logo.png"></p>
 
 ## WebAssembly Experiment: Array Sum & Quicksort
 
