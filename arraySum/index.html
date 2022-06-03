@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM Array Sum</title>
+</head>
+
+<body>
+
+    <div style="display: flex; justify-content: center; margin-top: 32px;">
+        <div>
+            <h1>WASM Array Sum</h1>
+
+            <p><i>Enter an array of numbers separated by comma:</i></p>
+            <textarea id="input">1,2,3,4,5</textarea>
+
+            <hr>
+            <button onclick="calculateSum()">Calculate</button>
+            <p id="output"></p>
+
+        </div>
+    </div>
+
+    <script>
+
+        let arraySum;
+        let memory;
+
+        /**
+         * Load the WASM file 
+         */
+        WebAssembly.instantiateStreaming(fetch('arraySum.wasm'))
+            .then(result => {
+                arraySum = result.instance.exports.arraySum;
+                memory = result.instance.exports.memory;
+            });
+
+        /**
+         * Get & process input
+         */
+        function getArray() {
+            // Get and convert textarea value to an array
+            const textareaArray = document.getElementById('input').value.split(',').map((item) => {
+                return parseInt(item);
+            });
+
+            // Create an array that can be passed to WASM 
+            const array = new Int32Array(memory.buffer, 0, textareaArray.length);
+            array.set(textareaArray);
+
+            return array;
+        }
+
+        /**
+         * Calculate and write output
+         */
+        function calculateSum() {
+            if (!arraySum || typeof arraySum !== "function") {
+                console.warn('WASM function isn\'t loaded');
+                return;
+            }
+
+            const array = getArray();
+            const sum = arraySum(array, array.length);
+
+            document.getElementById('output').innerHTML = `<b>Sum:</b> ${sum}`;
+        }
+
+    </script>
+
+</body>
+
+</html>
