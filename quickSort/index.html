@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WASM Quick Sort</title>
+</head>
+
+<body>
+
+    <div style="display: flex; justify-content: center; margin-top: 32px;">
+        <div>
+            <h1>WASM Quick Sort</h1>
+
+            <p><i>Enter an array of numbers separated by comma:</i></p>
+            <textarea id="inputArray">12,0,13,1,202,43,66,22</textarea>
+
+            <hr>
+            <button onclick="sortArray()">Sort Array</button>
+            <p id="sortedArray"></p>
+            <p id="arraySum"></p>
+            <p id="performance"></p>
+
+        </div>
+    </div>
+
+    <script>
+
+        let quickSort;
+        let arraySum;
+        let memory;
+
+        /**
+         * Load the WASM file 
+         */
+        WebAssembly.instantiateStreaming(fetch('quickSort.wasm'))
+            .then(result => {
+                quickSort = result.instance.exports.quickSort;
+                memory = result.instance.exports.memory;
+            });
+
+        /**
+         * Get & process input
+         */
+        function getArray() {
+            // Get and convert textarea value to an array
+            const textareaArray = document.getElementById('inputArray').value.split(',').map((item) => {
+                return parseInt(item);
+            });
+
+            // Create an array that can be passed to WASM 
+            const array = new Int32Array(memory.buffer, 0, textareaArray.length);
+            array.set(textareaArray);
+
+            return array;
+        }
+
+        /**
+         * Sort and write output
+         */
+        function sortArray() {
+            if (!quickSort || typeof quickSort !== "function") {
+                console.warn('WASM function isn\'t loaded');
+                return;
+            }
+
+            const array = getArray();
+            let start = performance.now();
+
+            quickSort(array, 0, array.length - 1);
+
+            let end = performance.now();
+            const durationWASM = end - start;
+            const sortedArray = array.join(', ');
+
+            // Write output
+            document.getElementById('sortedArray').innerHTML = `<b>Sorted Array:</b> ${sortedArray}`;
+            document.getElementById('arraySum').innerHTML = `<b>Sorted Array:</b> ${sortedArray}`;
+            document.getElementById('performance').innerHTML = `<b>Duration:</b> ${durationWASM} milliseconds`;
+        }
+
+    </script>
+
+</body>
+
+</html>
