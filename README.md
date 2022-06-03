@@ -6,7 +6,7 @@ Lately I wrote mostly Javascript and Javascript (and Typescript). It's great, I 
 
 It can be achieved using [WebAssembly](https://en.wikipedia.org/wiki/WebAssembly). So I started digging into it, and that repo is a result of my first impression.
 
-- PS. Use an http server to run the code (because of CORS)
+- DEMO [here](https://coltisor.github.io/WASM-Quicksort-Sum/)
 
 ## Experiment #1: Array Sum
 
