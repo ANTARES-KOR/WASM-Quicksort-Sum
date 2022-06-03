@@ -22,4 +22,4 @@ Previously, I was able to send an array from JS to WASM, and get back an integer
 
 A C implementation of quicksort algorithm from [GeeksForGeeks](https://www.geeksforgeeks.org/quick-sort/) was very helpful for that.
 
-Sadly, I was unable to return an array from C++WASM. Instead, I used a void function for the Quicksort implementation, but because of the "memory buffer allocation" mentioned before – the array sent from JS to WASM is actually ["passed by reference"](https://levelup.gitconnected.com/pass-by-value-vs-pass-by-reference-in-javascript-82fa8736c9f7) – meaning it will store the result after the sorting.
+Sadly, I was unable to return an array from C+WASM. Instead, I used a void function for the Quicksort implementation, but because of the "memory buffer allocation" mentioned before – the array sent from JS to WASM is actually ["passed by reference"](https://levelup.gitconnected.com/pass-by-value-vs-pass-by-reference-in-javascript-82fa8736c9f7) – meaning it will store the result after the sorting.
