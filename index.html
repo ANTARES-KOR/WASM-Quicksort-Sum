@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WASM Experiments: Array Sum & Quicksort</title>
     <style>
-        body {
-            height: 90vh;
-            display: flex;
-            gap: 50px;
-        }
+      body {
+        height: 90vh;
+        display: flex;
+        gap: 50px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-    <iframe src="arraySum/index.html" style="border:none;" title="Array Sum Page"></iframe>
-    <iframe src="quickSort/index.html" style="border:none;" title="Quick Sort Page"></iframe>
-
-</body>
-
+  <body>
+    <main style="display: flex; width: 100vw">
+      <iframe
+        src="quickSort/index.html"
+        style="border: none; flex: 1"
+        title="Quick Sort Page"
+      ></iframe>
+      <iframe
+        src="quicksort_js/index.html"
+        style="border: none; flex: 1"
+        title="Quick Sort JS Page"
+      ></iframe>
+    </main>
+  </body>
 </html>

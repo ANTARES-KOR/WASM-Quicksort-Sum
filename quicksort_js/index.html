@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Quick Sort</title>
+  </head>
+
+  <body>
+    <div style="display: flex; justify-content: center; margin-top: 32px">
+      <div>
+        <h1>Javascript Quick Sort</h1>
+
+        <p><i>Enter an array of numbers separated by comma:</i></p>
+
+        <textarea id="inputArray"> </textarea>
+
+        <hr />
+        <button onclick="sortArray()">Sort Array</button>
+        <p id="performance"></p>
+        <p id="sortedArray"></p>
+      </div>
+    </div>
+
+    <script>
+      function swap(items, leftIndex, rightIndex) {
+        var temp = items[leftIndex];
+        items[leftIndex] = items[rightIndex];
+        items[rightIndex] = temp;
+      }
+
+      function partition(items, left, right) {
+        var pivot = items[Math.floor((right + left) / 2)], //middle element
+          i = left, //left pointer
+          j = right; //right pointer
+        while (i <= j) {
+          while (items[i] < pivot) {
+            i++;
+          }
+          while (items[j] > pivot) {
+            j--;
+          }
+          if (i <= j) {
+            swap(items, i, j); //sawpping two elements
+            i++;
+            j--;
+          }
+        }
+        return i;
+      }
+
+      function quickSort(items, left, right) {
+        var index;
+        if (items.length > 1) {
+          index = partition(items, left, right); //index returned from partition
+          if (left < index - 1) {
+            //more elements on the left side of the pivot
+            quickSort(items, left, index - 1);
+          }
+          if (index < right) {
+            //more elements on the right side of the pivot
+            quickSort(items, index, right);
+          }
+        }
+        return items;
+      }
+
+      /**
+       * Get & process input
+       */
+      function getArray() {
+        // Get and convert textarea value to an array
+        const textAreaArray = document
+          .getElementById("inputArray")
+          .value.split(", ")
+          .map((item) => {
+            return parseInt(item);
+          });
+
+        return textAreaArray;
+      }
+
+      /**
+       * Sort and write output
+       */
+      function sortArray() {
+        const array = getArray();
+        let start = performance.now();
+
+        quickSort(array, 0, array.length - 1);
+
+        let end = performance.now();
+        const durationJS = end - start;
+        const sortedArray = array.join(", ");
+
+        // Write output
+        document.getElementById(
+          "sortedArray"
+        ).innerHTML = `<b>Sorted Array:</b> ${sortedArray}`;
+        document.getElementById(
+          "performance"
+        ).innerHTML = `<b>Duration:</b> ${durationJS} milliseconds`;
+      }
+    </script>
+  </body>
+</html>
