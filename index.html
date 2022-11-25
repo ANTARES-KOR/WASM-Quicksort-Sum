@@ -15,17 +15,30 @@
   </head>
 
   <body>
-    <main style="display: flex; width: 100vw">
-      <iframe
-        src="quickSort/index.html"
-        style="border: none; flex: 1"
-        title="Quick Sort Page"
-      ></iframe>
-      <iframe
-        src="quicksort_js/index.html"
-        style="border: none; flex: 1"
-        title="Quick Sort JS Page"
-      ></iframe>
+    <main
+      style="
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        align-items: center;
+      "
+    >
+      <h1>WASM VS JS Quicksort Performance Comparison</h1>
+      <a target="_blank" href="https://www.random.org/integer-sets/"
+        >random generate number set</a
+      >
+      <section style="display: flex; width: 100vw; height: 100%">
+        <iframe
+          src="quickSort/index.html"
+          style="border: none; flex: 1"
+          title="Quick Sort Page"
+        ></iframe>
+        <iframe
+          src="quicksort_js/index.html"
+          style="border: none; flex: 1"
+          title="Quick Sort JS Page"
+        ></iframe>
+      </section>
     </main>
   </body>
 </html>
